@@ -1,10 +1,13 @@
 extern crate clap;
 use clap::{Arg, App, SubCommand};
+use std::env;
 use std::process;
 
 fn main() {
-    let matches = App::new("kvs")
-        .version("0.1.0")
+    let cli = App::new(env::var("CARGO_PKG_NAME").unwrap().as_str())
+        .version(env::var("CARGO_PKG_VERSION").unwrap().as_str())
+        .author(env::var("CARGO_PKG_AUTHORS").unwrap().as_str())
+        .about(env::var("CARGO_PKG_DESCRIPTION").unwrap().as_str())
         .subcommand(SubCommand::with_name("get")
                     .arg(Arg::with_name("key")))
         .subcommand(SubCommand::with_name("set")
@@ -14,7 +17,7 @@ fn main() {
                     .arg(Arg::with_name("key")))
         .get_matches();
 
-    match matches.subcommand_name() {
+    match cli.subcommand_name() {
         Some("get") => {
             eprintln!("unimplemented");
             process::exit(1);
