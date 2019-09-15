@@ -7,7 +7,7 @@ pub struct KvStore {
 impl KvStore {
     pub fn new() -> KvStore {
         KvStore {
-            hash_map: HashMap::new()
+            hash_map: HashMap::new(),
         }
     }
 
